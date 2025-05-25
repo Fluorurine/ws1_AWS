@@ -1,20 +1,18 @@
 ---
-title : "Giới thiệu"
-date :  "`r Sys.Date()`" 
-weight : 1 
-chapter : false
-pre : " <b> 1. </b> "
+title: "Giới thiệu"
+date: "`r Sys.Date()`"
+weight: 1
+chapter: false
+pre: " <b> 1. </b> "
 ---
 
-#### Giới thiệu Amazon VPC
+Kiến trúc này lấy cảm hứng từ [Hướng dẫn theo quy định của AWS](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/serve-static-content-in-an-amazon-s3-bucket-through-a-vpc-by-using-amazon-cloudfront.html) lý tưởng.
 
-**Amazon Virtual Private Cloud (Amazon VPC)** là **“Đám mây Riêng tư Ảo”** là một mạng ảo tùy chỉnh nằm bên trong **AWS Cloud** và tách biệt với toàn bộ thế giới bên ngoài. Khái niệm này tương tự như việc thiết kế và triển khai một mạng độc lập riêng biệt hoạt động trong một trung tâm dữ liệu on-premise, loại hình vẫn còn rất phổ biến hiện nay tại nhiều nơi trên thế giới.
+Khi bạn phục vụ nội dung tĩnh được lưu trữ trên **Amazon Web Services (AWS)**, phương pháp được khuyến nghị là sử dụng thùng **Amazon Simple Storage Service (S3)** làm nguồn gốc và sử dụng Amazon CloudFront để phân phối nội dung. Giải pháp này có hai lợi ích chính. Trước hết là sự tiện lợi của việc lưu trữ đệm nội dung tĩnh tại các vị trí biên. Lý do thứ hai là bạn có thể xác định danh sách kiểm soát truy cập web (web ACL) cho bản phân phối **CloudFront**, giúp bạn bảo mật các yêu cầu đối với nội dung với chi phí cấu hình và quản trị tối thiểu.
 
-Bên trong VPC tùy chỉnh đó, bạn có toàn quyền kiểm kiểm soát môi trường mạng ảo của mình, nghĩa là vừa có khả năng khởi tạo và chạy các tài nguyên AWS, vừa có thể lựa chọn phạm vi địa chỉ IP, tạo các mạng con và cấu hình các bảng định tuyến và cổng kết nối mạng. Bạn có thể sử dụng cả IPv4 và IPv6 để truy cập an toàn và dễ dàng vào tài nguyên và ứng dụng trong VPC. 
+Tuy nhiên, **có một hạn chế chung về kiến ​​trúc đối với phương pháp tiêu chuẩn được khuyến nghị**. Trong một số môi trường, bạn muốn các thiết bị tường lửa ảo được triển khai trong một đám mây riêng ảo (VPC) để kiểm tra tất cả nội dung, bao gồm cả nội dung tĩnh. Phương pháp tiếp cận tiêu chuẩn không định tuyến lưu lượng qua VPC để kiểm tra. Mẫu này cung cấp một giải pháp kiến ​​trúc thay thế. Bạn vẫn sử dụng bản phân phối CloudFront để phục vụ nội dung tĩnh trong thùng S3, nhưng lưu lượng được định tuyến qua VPC bằng cách sử dụng Bộ cân bằng tải ứng dụng. Sau đó, một hàm AWS Lambda sẽ truy xuất và trả về nội dung từ thùng S3.
 
-**Region** là khái niệm mô tả nhiều cụm trung tâm dữ liệu cực lớn của AWS đặt tại một vùng lãnh thổ nhất định. Trong một region, ta có thể tạo ra nhiều VPC và mỗi VPC được phân biệt nhau bởi những dải không gian địa chỉ IP khác nhau. Ta chỉ định phạm vi địa chỉ IPv4 bằng cách lựa chọn một **Classless Inter-Domain Routing (CIDR)**, chẳng hạn như **10.0.0.0/16**. Phạm vi địa chỉ của Amazon VPC không thể thay đổi sau khi nó đã được tạo. Phạm vi địa chỉ Amazon VPC có thể lớn bằng /16 (tức 65536 địa chỉ khả dụng) hoặc nhỏ bằng /28 (tức 16 địa chỉ khả dụng) và chúng không được phép trùng với bất kỳ mạng nào khác mà chúng sẽ được kết nối tới.
-
-Dịch vụ Amazon VPC được ra mắt sau dịch vụ Amazon EC2, vì vậy mà có thời điểm AWS cung cấp hai nền tảng mạng khác nhau đó là EC2-Classic và EC2-VPC. EC2-Classic là nền tảng mạng đầu tiên, trong đó tất cả Amazon EC2 được tạo ra đều nằm trong một mạng phẳng duy nhất, chia sẻ kết nối giữa các khách hàng của AWS. Cho tới tháng 12 năm 2013, AWS chỉ còn hỗ trợ EC2-VPC với VPC mặc định được tạo ra ở mỗi Region cùng một subnet mặc định với CIDR block có giá trị là 172.31.0.0/16.
+![Phục vụ nội dung tĩnh qua VPC với CloudFront](/images/1/WS1.svg?featherlight=false&width=90pc "Phục vụ nội dung tĩnh qua VPC với CloudFront")
 
 #### Nội dung
 
