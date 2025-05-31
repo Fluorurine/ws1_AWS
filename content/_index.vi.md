@@ -1,6 +1,6 @@
 ---
 title : "Bắt đầu với Amazon VPC và AWS VPN Site to Site"
-date :  "`r Sys.Date()`" 
+date : 2024-01-01 
 weight : 1 
 chapter : false
 ---

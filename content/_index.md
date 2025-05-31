@@ -1,6 +1,6 @@
 ---
 title: "Serve S3 bucket static content through VPC with Amazon CloudFront"
-date: "`r Sys.Date()`"
+date: 2024-01-01
 weight: 1
 chapter: false
 ---
