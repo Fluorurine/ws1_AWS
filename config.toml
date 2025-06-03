@@ -1,3 +1,4 @@
+baseURL = "https://fluorurine.github.io/ws1_AWS/"
 relativeURLs = true
 languageCode = "en-US"
 # Change the default theme to be use when building the site with Hugo
