@@ -1,5 +1,5 @@
 baseURL = "/ws1_AWS/"
-relativeURLs = true
+relativeURLs = false
 languageCode = "en-US"
 # Change the default theme to be use when building the site with Hugo
 theme = "hugo-theme-learn"
