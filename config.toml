@@ -1,7 +1,9 @@
 canonifyURLs = true
+languageCode = "en-US"
 # Change the default theme to be use when building the site with Hugo
 theme = "hugo-theme-learn"
 defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = true
 # For search functionality
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
