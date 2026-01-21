@@ -1,4 +1,4 @@
-canonifyURLs = true
+relativeURLs = true
 languageCode = "en-US"
 # Change the default theme to be use when building the site with Hugo
 theme = "hugo-theme-learn"
